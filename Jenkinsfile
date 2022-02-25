@@ -19,9 +19,9 @@ pipeline {
 							junit 'target/surefire-reports/*.xml'
 							jacoco execPattern: 'target/jacoco.exec'
               
-            }
-       	}					
-       
+                }
+       	    }					
+         }
       stage('Docker Build and Push') {
          steps {
             withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
@@ -29,8 +29,8 @@ pipeline {
 		  sh 'docker build -t araditsajwan/numeric-app:""$GIT_COMMIT"" .'
 		  sh 'docker push araditsajwan/numeric-app:""$GIT_COMMIT""'
                   }
+                }
             }
-	    
         
 	stage('Kubernetes Deployment - DEV') {
 	      steps {
