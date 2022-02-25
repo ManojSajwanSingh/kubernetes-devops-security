@@ -7,6 +7,12 @@ pipeline {
               sh "mvn clean package -DskipTests=true"
               archive 'target/*.jar' // this is just to test the change.
             }
+        }  
+      stage('Unit Tests') {
+            steps {
+              sh "mvn test"
+              
+            }
         }   
     }
 }
