@@ -34,7 +34,7 @@ pipeline {
 	      }
 	    }
 	  
-	  stages {
+	
       stage('Sonar Qube - SAST') {
             steps {
               sh " mvn sonar:sonar \
@@ -67,4 +67,4 @@ pipeline {
       }
   }    
   }
-}
+
