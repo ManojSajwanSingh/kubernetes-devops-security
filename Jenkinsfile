@@ -35,20 +35,18 @@ pipeline {
 	    }
 	  
 	
-      stage('Sonar Qube - SAST') {
-            steps {
-		    withSonarQubeEnv('SonarQube') {
-		      sh " mvn sonar:sonar \
-		  -Dsonar.projectKey=numeric-application \
-		  -Dsonar.host.url=http://devsecops-demo.eastus.cloudapp.azure.com:9000 \
-		  -Dsonar.login=0fd6dc8d89f33e9a5ef5d88dd9a5d4c26eef2b92"
-			    }
-		    timeout(time:2, unit: 'MINUTES') {
-			    script {
-				    waitforQualityGate abortPipeline: true
-			    }
-			}
-	      }
+      stage('SonarQube - SAST') {
+      steps {
+        withSonarQubeEnv('SonarQube') {
+          sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://devsecops-demo.eastus.cloudapp.azure.com:9000 -Dsonar.login=0925129cf435c63164d3e63c9f9d88ea9f9d7f05"
+        }
+        timeout(time: 2, unit: 'MINUTES') {
+          script {
+            waitForQualityGate abortPipeline: true
+          }
+        }
+      }
+    }
 	  
 	  
 	  
@@ -72,5 +70,5 @@ pipeline {
       }
   }    
   }
-}
+
 
